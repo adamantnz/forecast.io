@@ -1,0 +1,17 @@
+<h1>Weather</h1>
+  <p>Location: London</p>
+  <p>Current Time: <%= Time.now.strftime("%d/%m/%Y %H:%M") %> (UTC)</p>
+  <p>Summary: <%= @summary %></p>
+  <p>Temperature: <%= @temperature %> &#8451</p>
+  <p><%= @icon %> <i>(icon placeholder)</i></p>
+  <p>Wind Speed: <%= @windSpeed %> m/s</p>
+  <p>Umbrella Safe:
+    <% if @windSpeed >= 12.00 %>
+        No!
+      <% else %>
+        Yes!
+    <% end %>
+  </p>
+  <p>Timezone: <%= @timezone %></p>
+<p>According to the <a href="http://www.metoffice.gov.uk/guide/weather/marine/beaufort-scale">
+  UK Beaufort Scale</a>, a mean wind speed of >= 12 m/s constitutes a 'strong breeze'.</p>

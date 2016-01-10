@@ -1,8 +1,8 @@
 class WeatherController < ApplicationController
   require 'forecast_io'
 
-  LATITUDE = 51.5072
-  LONGITUDE = -0.1275
+  LAT = 51.5072
+  LONG = -0.1275
 
   def index
     @summary = weatherReport.currently.summary.to_s
@@ -10,6 +10,8 @@ class WeatherController < ApplicationController
     @windSpeed = weatherReport.currently.windSpeed
     @temperature = weatherReport.currently.temperature
     @timezone = weatherReport.timezone
+    @latitude = params[:latitude]
+    @longitude = params[:longitude]
   end
 
 private
@@ -18,6 +20,6 @@ private
   end
 
   def weatherReport
-    ForecastIO.forecast(LATITUDE, LONGITUDE, params:{units:'si'})
+    ForecastIO.forecast(LAT, LONG, params:{units:'si'})
   end
 end

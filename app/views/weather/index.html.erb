@@ -1,15 +1,13 @@
 <%= form_tag("/", method:"get") do %>
   <%= label_tag(:latitude, "Latitude:") %>
-  <%= text_field_tag(:latitude) %> <br>
-  <%= label_tag(:longitude,"Longitude:") %>
-  <%= text_field_tag(:longitude) %> <br>
+  <%= text_field_tag(:latitude, @latitude, :required => true, placeholder: "51.5072") %> <br>
+  <%= label_tag(:longitude, "Longitude:") %>
+  <%= text_field_tag(:longitude, @longitude, :required => true, placeholder: "-0.1275") %> <br>
   <%= submit_tag("Search") %>
 <% end %>
-<%= link_to "Home", root_path %></p>
+<%= link_to "Refresh", root_path %></p>
 <hr>
-
-
-<h1>Weather</h1>
+<h1>Current Weather for <%= @latitude %>, <%= @longitude%></h1>
   <p>Location: London</p>
   <p>Current Time: <%= Time.now.strftime("%d/%m/%Y %H:%M") %> (UTC)</p>
   <p>Summary: <%= @summary %></p>

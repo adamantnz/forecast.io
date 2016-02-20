@@ -1,18 +1,17 @@
 <%= form_tag("/", method:"get") do %>
   <%= label_tag(:latitude, "Latitude:") %>
-  <%= text_field_tag(:latitude, @latitude, :required => true, placeholder: "51.5072") %> <br>
+  <%= text_field_tag(:latitude, @latitude, :required => true, placeholder: "51.5072") %>
   <%= label_tag(:longitude, "Longitude:") %>
-  <%= text_field_tag(:longitude, @longitude, :required => true, placeholder: "-0.1275") %> <br>
+  <%= text_field_tag(:longitude, @longitude, :required => true, placeholder: "-0.1275") %>
   <%= submit_tag("Search") %>
 <% end %>
-<%= link_to "Refresh", root_path %></p>
-<hr>
+<%= link_to "Refresh", root_path %></p><hr>
+<% if @latitude && @longitude !=nil %>
 <h1>Current Weather for <%= @latitude %>, <%= @longitude%></h1>
   <p>Location: London</p>
-  <p>Current Time: <%= Time.now.strftime("%d/%m/%Y %H:%M") %> (UTC)</p>
   <p>Summary: <%= @summary %></p>
   <p>Temperature: <%= @temperature %> &#8451</p>
-  <p><%= @icon %> <i>(icon placeholder)</i></p>
+  <p><canvas id=<%= @icon %> width="128" height="128"></canvas></p>
   <p>Wind Speed: <%= @windSpeed %> m/s</p>
   <p>Umbrella Safe:
     <% if @windSpeed >= 12.00 %>
@@ -20,7 +19,18 @@
       <% else %>
         Yes!
     <% end %>
-  </p>
   <p>Timezone: <%= @timezone %></p>
-<p>According to the <a href="http://www.metoffice.gov.uk/guide/weather/marine/beaufort-scale">
-  UK Beaufort Scale</a>, a mean wind speed of >= 12 m/s constitutes a 'strong breeze'.</p>
+<% end %>
+<script>
+  var icons = new Skycons(),
+      list  = [
+        "clear-day", "clear-night", "partly-cloudy-day",
+        "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
+        "fog"
+      ],
+      i;
+
+  for(i = list.length; i--; )
+    icons.set(list[i], list[i]);
+  icons.play();
+</script>

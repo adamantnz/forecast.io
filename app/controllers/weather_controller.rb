@@ -4,6 +4,7 @@ class WeatherController < ApplicationController
   LAT = 51.5072
   LONG = -0.1275
 
+# NOTE: method needs to be extracted
   def index
     @summary = weatherReport.currently.summary.to_s
     @icon = weatherReport.currently.icon
